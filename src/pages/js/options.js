@@ -107,7 +107,7 @@ document.body.addEventListener('click',function(e){
             // bindFn.item( type );
         } else if( id === 'next' ){
             if( !switchUse ){
-                alert( '请选择集成方式' );
+                alert( '请填写相关配置参数' );
                 return;
             }
             bindFn.btn( switchUse );

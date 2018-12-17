@@ -10,7 +10,7 @@ const webpack = require('webpack'),
     port = 9090;
 
 
-const $exec=require('child_process').exec;
+// const $exec=require('child_process').exec;
 const open = require("open");
 
 const fs = require('fs');
