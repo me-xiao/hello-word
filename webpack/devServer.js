@@ -8,6 +8,11 @@ const webpack = require('webpack'),
     webpackDevServer = require('webpack-dev-server'),
     config = require('./webpack.dev'),
     port = 9090;
+
+
+const $exec=require('child_process').exec;
+const open = require("open");
+
 const fs = require('fs');
 const url = require('url');
 const path = require('path');
@@ -147,6 +152,7 @@ new webpackDevServer(webpack(config), {
         console.log(err);
     }
     console.log(`Hi,man, Now listening at localhost:${port}!`);
+    open( `http://127.0.0.1:${port}/pages/index.html` );
 });
 
 
