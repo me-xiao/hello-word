@@ -31,8 +31,8 @@ const ParseQuery = query => {
 
 config.watch = true; // 开启监听文件更改
 
-const handleParams = css =>{
-    return css.replace(/(?<=([\{]))\S{1}/ig, '\n $&')
+const handleParams = str =>{
+    return str.replace(/(?<=([\{]))\S{1}/ig, '\n $&')
     .replace(/(?<=([,]))[\s]*(?=(["]))/ig, '\n  ')
     .replace(/[\s\S](?=([\}]))/ig, '$&\n')
 }
@@ -68,7 +68,7 @@ new webpackDevServer(webpack(config), {
                     fs.writeFileSync( path.join(__dirname, "../src/data/params.json"), handleParams( JSON.stringify( params_data ) ) );
                     res.writeHead(200, [
                         ['Content-Type', 'application/json' + '; charset=utf-8'],
-                        ['Access-Control-Allow-Origin', '*'] //CORS
+                        // ['Access-Control-Allow-Origin', '*'] //CORS
                     ]);
                     res.write('{"code":200,"msg":"ok!"}');
                     return res.end();
@@ -81,9 +81,29 @@ new webpackDevServer(webpack(config), {
                     fs.writeFileSync( path.join(__dirname, "../src/data/params.json"), handleParams( JSON.stringify( params_data ) ) );
                     res.writeHead(200, [
                         ['Content-Type', 'application/json' + '; charset=utf-8'],
-                        ['Access-Control-Allow-Origin', '*'] //CORS
+                        // ['Access-Control-Allow-Origin', '*'] //CORS
                     ]);
                     res.write('{"code":200,"msg":"ok!"}');
+                    return res.end();
+                }else if( url.parse(req.originalUrl).pathname == '/api/get_params' ){
+                    const params_str = fs.readFileSync( path.join(__dirname, "../src/data/params.json") );
+                    res.writeHead(200, [
+                        ['Content-Type', 'application/json' + '; charset=utf-8'],
+                    ]);
+                    res.write( `{"code":200, "msg":"ok", "data": ${params_str}}` );
+                    return res.end();
+                }else if( url.parse(req.originalUrl).pathname == '/api/set_params' ){
+                    const query_data = ParseQuery( url.parse(req.originalUrl).query );
+                    const params_data = JSON.parse( fs.readFileSync( path.join(__dirname, "../src/data/params.json") ) );
+                    for( const key in query_data ){
+                        params_data[ key ] = decodeURIComponent( query_data[ key ] );
+                    }
+                    fs.writeFileSync( path.join(__dirname, "../src/data/params.json"), handleParams( JSON.stringify( params_data ) ) );
+
+                    res.writeHead(200, [
+                        ['Content-Type', 'application/json' + '; charset=utf-8'],
+                    ]);
+                    res.write( '{"code":200,"msg":"ok!"}' );
                     return res.end();
                 }else{
                     // res.writeHead(200, [

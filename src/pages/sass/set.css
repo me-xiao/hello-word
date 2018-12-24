@@ -1,54 +1,6 @@
 @import "./base.scss";
 .main{
-	max-width: 1280px;
-	margin: 0 auto;
-	padding: 20px 0;
-	.desc{
-		padding: 20px;
-		h3{
-			font-size: 28px;
-			line-height: 80px;
-			text-align: center;
-		}
-		p{
-			margin: 0;
-			color: #999;
-			text-align: center;
-		}
-	}
-	.items{
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-
-	}
 	.item{
-		flex: 1;
-		margin-bottom: 24px;
-		box-shadow: 0 1px 4px rgba(0,0,0,.08);
-		font-variant: tabular-nums;
-		line-height: 1.5;
-		background: #fff;
-		border-radius: 2px;
-		transition: all .5s;
-		padding: 20px;
-		margin: 10px;
-		position: relative;
-		img{
-			display: block;
-			margin: 0 auto 20px;
-		}
-		p{
-			text-align: center;
-			padding: 5px;
-			margin: 0;
-			color: #999;
-		}
-		.title{
-			color: #666;
-			color: #1d3b73;
-			font-size: 20px;
-		}
 		&:hover{
 			cursor: pointer;
 			background: #eee;

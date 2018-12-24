@@ -65,7 +65,7 @@ module.exports = {
         publicPath: "/"
     },
     devtool: 'eval-source-map', // 指定加source-map的方式
-    watch: false, // 开启监听文件更改，自动刷新
+    watch: false, 
     watchOptions: {
         ignored: /(node_modules|data)/, //忽略不用监听变更的目录
         aggregateTimeout: 500, //防止重复保存频繁重新编译,500毫秒内重复保存不打包

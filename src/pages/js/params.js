@@ -1,117 +1,142 @@
 require('../sass/params.css');
 
+import 'highlight.js/styles/github.css';
 
 //xhr
+import ajax from './utils/ajax.js'
 
-//创建ajax函数
-const ajax = function (_options) {
-     const options = _options || {};
-     options.type = (options.type || 'GET').toUpperCase();
-     options.dataType = options.dataType || 'javascript';
- 
-     //格式化参数
-     const formatParams = function (data) {
-         let arr = [];
-         for (let name in data) {
-             arr.push(encodeURIComponent(name) + '=' + encodeURIComponent(data[name]));
-         }
-         //arr.push(('v=' + Math.random()).replace('.',''));
-         return arr.join('&');
-     }
- 
-     const params = options.data ? formatParams(options.data) : '';
- 
- 
-     //创建-第一步
-     let xhr;
-     if (window.XMLHttpRequest) {
-         xhr = new XMLHttpRequest();
-     } else {
-         xhr = ActiveXObject('Microsoft.XMLHTTP');
-     }
- 
-     //在响应成功前设置一个定时器（响应超时提示）
-     const timer = setTimeout(function () {
-         //让后续的函数停止执行
-         xhr.onreadystatechange = null;
-         console.log('timeout:' + options.url);
-         options.error && options.error(status);
-     }, options.timeout || 8000);
- 
- 
-     //接收-第三步
-     xhr.onreadystatechange = function () {
-         if (xhr.readyState == 4) {
-             clearTimeout(timer);
-             const status = xhr.status;
-             if (status === 200 || status === 304) {
-                 const resData = options.dataType === 'json' ? JSON.parse(xhr.responseText) : xhr.responseText;
-                 options.success && options.success(resData, xhr.responseXML);
-             } else {
-                 options.error && options.error(status);
-             }
-         }
-     }
-     xhr.withCredentials = true;
-     //连接和发送-第二步
-     if (options.type == 'GET') {
-         xhr.open('GET', options.url + '?' + params, true);
-         //xhr.setRequestHeader("Accept-Encoding", "gzip");
-         xhr.send(null);
-     } else if (options.type == 'POST') {
-         xhr.open('POST', options.url, true);
-         //设置表单提交时的内容类型
-         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-         xhr.send(params);
-     }
- }
- 
+import hljs from 'highlight.js/lib/highlight';
+import _json from 'highlight.js/lib/languages/json';
+import _javascript from 'highlight.js/lib/languages/javascript';
+import _c from 'highlight.js/lib/languages/1c';
+hljs.registerLanguage('javascript', _javascript);
+hljs.registerLanguage('json', _json);
+hljs.registerLanguage('1c', _c);
+//参考：
+//https://highlightjs.org/
+//https://www.bootcdn.cn/highlight.js/
+//https://www.cnblogs.com/moqiutao/p/6541089.html
 
-const bindFn = {
-    btn: use =>{
-        ajax({
-          url: '/api/set_use',
-          data: {
-              use: use
-          },
-          dataType: 'json',
-          success: (res) => {
-               if( res.code == 200 ){
-                    alert( '成功选择：集成方式' + use );
-                    window.location.href = '/pages/params.html';
-               }
-          },
-          error: (msg) => {}
-      });
+
+const params_code = {
+    '1': params => {
+        let str = JSON.stringify( params );
+        const handleParams = str =>{
+            return str.replace(/(?<=([\{]))\S{1}/ig, '\n  $&')
+            .replace(/(?<=([,]))[\s]*(?=(["]))/ig, '\n  ')
+            .replace(/[\s\S](?=([\}]))/ig, '$&\n')
+        }
+        str = handleParams( str );
+        str = `//require式-开发源码
+const VBE = require("VBE");
+VBE(${str})`;
+        return str;
+    },
+    '2': params =>{
+        let str = JSON.stringify( params );
+        const handleParams = str =>{
+            return str.replace(/(?<=([\{]))\S{1}/ig, '\n  $&')
+            .replace(/(?<=([,]))[\s]*(?=(["]))/ig, '\n  ')
+            .replace(/[\s\S](?=([\}]))/ig, '$&\n')
+        };
+        str = handleParams( str );
+        str = `//SDK抽离式-页面源码
+<!DOCTYPE html><html><head>
+<meta charset="UTF-8">
+<title>page</title>
+</head>
+<body>
+    <script type="text/javascript" src="//g.alcdn.con/VBE/0.0.1/js/.js"></script>
+    <script>
+    new VBE(${str})
+    </script>
+</body>
+</html>`;
+        return str;
     }
 }
 
-let switchUse;
-document.body.addEventListener('click',function(e){
+const bindFn = {
+    submit: () => {
+        const params = {};
+        document.querySelectorAll('.item_params').forEach(item => {
+            const value = item.value;
+            const key = item.name;
+            if (value) {
+                params[key] = value;
+            }
+        })
+        ajax({
+            url: '/api/set_params',
+            data: params,
+            dataType: 'json',
+            success: (res) => {
+                if (res.code == 200) {
+                    alert('参数提交成功')
+                }
+                bindFn.get_params();
+            },
+            error: (msg) => {}
+        });
+    },
+    get_params: () => {
+        ajax({
+            url: '/api/get_params',
+            dataType: 'json',
+            success: (res) => {
+                console.log(res);
+                if (res.code != 200) {
+                    alert('成功选择：集成方式' + use);
+                    return;
+                }
+                const data = res.data;
+                const items = `<li><span>顶部栏HTML</span>
+                        <textarea placeholder="请输入顶部栏HTML" name="top_html" class="item_params">${data.top_html || ''}</textarea>
+                    </li>
+                    <li><span>底部栏HTML</span>
+                        <textarea placeholder="请输入底部栏HTML" name="bottom_html" class="item_params">${data.bottom_html || ''}</textarea>
+                    </li>
+                    <li>
+                        <span>底部栏高度</span>
+                        <input type="text" value="" placeholder="请输入底部栏高度" class="item_params" />
+                    </li>
+                    <li>
+                        <span>模块map.js</span>
+                        <input type="text" value="" placeholder="请输入模块map.js" class="item_params" />
+                    </li>`;
+                document.querySelector('#items').innerHTML = items;
+
+
+
+                
+
+
+
+                document.querySelector('#Usage').textContent = params_code[ data.use ]( data );
+                hljs.highlightBlock( document.querySelector('pre') );
+                // hljs.highlightBlock( document.querySelectorAll('pre')[1] );
+            },
+            error: (msg) => {}
+        });
+    }
+}
+bindFn.get_params();
+
+document.body.addEventListener('click', function (e) {
     const evt = e || window.event;
     let target = evt.target || evt.srcElement;
-    while( target && target != document ){
+    while (target && target != document) {
         const className = target.className;
         const id = target.id;
-        if( className === 'item' ){
-            switchUse = target.dataset.use;
-            document.querySelectorAll( '.on' ).forEach(item=>{
-                const classNameArr = item.className.split(' ');
-                console.log( classNameArr )
-                const index = classNameArr.indexOf( 'on' );
-                classNameArr.splice( index, 1 );
-                item.className = classNameArr.join(' ');
-            });
-            target.className = target.className ? target.className + ' on' : 'on';
-    
-            // bindFn.item( type );
-        } else if( id === 'next' ){
-            if( !switchUse ){
-                alert( '请选择风格' );
-                return;
-            }
-            bindFn.btn( switchUse );
+        if (className === 'item') {
+
+        } else if (id === 'next') {
+            // if( !switchUse ){
+            //     alert( '请选择风格' );
+            //     return;
+            // }
+            bindFn.submit();
         }
         target = target.parentNode;
     }
- });
+});

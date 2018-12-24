@@ -64,7 +64,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "7ccc5c75037aa0fc2387";
+/******/ 	var hotCurrentHash = "6e3bdff98be9bfaf8953";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -10225,13 +10225,78 @@ webpackContext.id = "./node_modules/webpack/hot sync ^\\.\\/log$";
 /*!*********************************!*\
   !*** ./src/pages/js/options.js ***!
   \*********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _utils_ajax_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils/ajax.js */ "./src/pages/js/utils/ajax.js");
 __webpack_require__(/*! ../sass/options.css */ "./src/pages/sass/options.css"); //xhr
+
+
+
+var bindFn = {
+  btn: function btn(use) {
+    Object(_utils_ajax_js__WEBPACK_IMPORTED_MODULE_0__["default"])({
+      url: '/api/set_use',
+      data: {
+        use: use
+      },
+      dataType: 'json',
+      success: function success(res) {
+        if (res.code == 200) {
+          alert('成功选择：集成方式' + use);
+          window.location.href = '/pages/params.html';
+        }
+      },
+      error: function error(msg) {}
+    });
+  }
+};
+var switchUse;
+document.body.addEventListener('click', function (e) {
+  var evt = e || window.event;
+  var target = evt.target || evt.srcElement;
+
+  while (target && target != document) {
+    var className = target.className;
+    var id = target.id;
+
+    if (className === 'item') {
+      switchUse = target.dataset.use;
+      document.querySelectorAll('.on').forEach(function (item) {
+        var classNameArr = item.className.split(' ');
+        console.log(classNameArr);
+        var index = classNameArr.indexOf('on');
+        classNameArr.splice(index, 1);
+        item.className = classNameArr.join(' ');
+      });
+      target.className = target.className ? target.className + ' on' : 'on'; // bindFn.item( type );
+    } else if (id === 'next') {
+      if (!switchUse) {
+        alert('请填写相关配置参数');
+        return;
+      }
+
+      bindFn.btn(switchUse);
+    }
+
+    target = target.parentNode;
+  }
+});
+
+/***/ }),
+
+/***/ "./src/pages/js/utils/ajax.js":
+/*!************************************!*\
+  !*** ./src/pages/js/utils/ajax.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 //创建ajax函数
-
-
 var ajax = function ajax(_options) {
   var options = _options || {};
   options.type = (options.type || 'GET').toUpperCase();
@@ -10294,55 +10359,7 @@ var ajax = function ajax(_options) {
   }
 };
 
-var bindFn = {
-  btn: function btn(use) {
-    ajax({
-      url: '/api/set_use',
-      data: {
-        use: use
-      },
-      dataType: 'json',
-      success: function success(res) {
-        if (res.code == 200) {
-          alert('成功选择：集成方式' + use);
-          window.location.href = '/pages/params.html';
-        }
-      },
-      error: function error(msg) {}
-    });
-  }
-};
-var switchUse;
-document.body.addEventListener('click', function (e) {
-  var evt = e || window.event;
-  var target = evt.target || evt.srcElement;
-
-  while (target && target != document) {
-    var className = target.className;
-    var id = target.id;
-
-    if (className === 'item') {
-      switchUse = target.dataset.use;
-      document.querySelectorAll('.on').forEach(function (item) {
-        var classNameArr = item.className.split(' ');
-        console.log(classNameArr);
-        var index = classNameArr.indexOf('on');
-        classNameArr.splice(index, 1);
-        item.className = classNameArr.join(' ');
-      });
-      target.className = target.className ? target.className + ' on' : 'on'; // bindFn.item( type );
-    } else if (id === 'next') {
-      if (!switchUse) {
-        alert('请选择集成方式');
-        return;
-      }
-
-      bindFn.btn(switchUse);
-    }
-
-    target = target.parentNode;
-  }
-});
+/* harmony default export */ __webpack_exports__["default"] = (ajax);
 
 /***/ }),
 

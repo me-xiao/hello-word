@@ -14,13 +14,60 @@
     </div>
 
 
-    <div class="main">
-        <ul>
-            <li><span>顶部栏高度</span><input type="text" value="" placeholder="请输入顶部栏目高度"></li>
-            <li><span>底部栏高度</span><input type="text" value="" placeholder="请输入底部栏目高度"></li>
-            <li><span>模块物料js</span><input type="text" value="" placeholder="请输入底部栏目高度"></li>
-        </ul>
 
+
+    <!-- <pre><code >
+            const mod_http = require('http');
+            const mod_url = require('url');
+            const mod_sass = require('node-sass');
+            const mod_fs = require('fs');
+            const mod_path = require('path');
+            
+            const ParseQuery = require('./util/ParseQuery');
+            const ParseCookie = require('./util/ParseCookie');
+            //console.log(pathname);
+            if (Router[pathname] && Router[pathname][1] === 'json') {
+                contentType = mime.json;
+                response.writeHead(200, {
+                    'Content-Type': contentType,
+                    'Access-Control-Allow-Origin': '*' //CORS
+                });
+            
+                readFile(Router[pathname][0], (data) => {
+                    response.write(data);
+                    response.end();
+                });
+            
+                console.log('router请求：' + pathname);
+                return;
+            } else if (Router[pathname]) {
+                const callbackFnName = ParseQuery(mod_url.parse(request.url).query).callback;
+                contentType = mime.js;
+                response.writeHead(200, {
+                    'Content-Type': contentType,
+                    'Access-Control-Allow-Origin': '*' //CORS
+                });
+            
+                readFile(Router[pathname][0], (data) => {
+                    response.write(`${callbackFnName ? callbackFnName + '(' + data + ')' : data}`);
+                    response.end();
+                });
+            
+                console.log('router-jsonp请求：' + pathname);
+                return;
+            }
+                        
+            </code></pre>
+             -->
+
+    <div class="main">
+        <ul id="items">
+        </ul>
+        <div class="code_box">
+            <h6>使用：</h6>
+            <pre><code id="Usage">
+            </code></pre>
+        </div>
     </div>
 
     <div class="run">
