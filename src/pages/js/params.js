@@ -1,10 +1,5 @@
 require('../sass/params.css');
-
-import 'highlight.js/styles/github.css';
-
-//xhr
-import ajax from './utils/ajax.js'
-
+import 'highlight.js/styles/atom-one-light.css';
 import hljs from 'highlight.js/lib/highlight';
 import _json from 'highlight.js/lib/languages/json';
 import _javascript from 'highlight.js/lib/languages/javascript';
@@ -17,6 +12,10 @@ hljs.registerLanguage('1c', _c);
 //https://www.bootcdn.cn/highlight.js/
 //https://www.cnblogs.com/moqiutao/p/6541089.html
 
+
+//xhr
+import ajax from './utils/ajax.js';
+// const ajax = require( './utils/ajax.js' );
 
 const params_code = {
     '1': params => {
@@ -43,12 +42,12 @@ VBE(${str})`;
         str = `//SDK抽离式-页面源码
 <!DOCTYPE html><html><head>
 <meta charset="UTF-8">
-<title>page</title>
+    <title>page</title>
 </head>
 <body>
     <script type="text/javascript" src="//g.alcdn.con/VBE/0.0.1/js/.js"></script>
     <script>
-    new VBE(${str})
+        new VBE(${str})
     </script>
 </body>
 </html>`;

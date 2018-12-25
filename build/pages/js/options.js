@@ -64,7 +64,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "6e3bdff98be9bfaf8953";
+/******/ 	var hotCurrentHash = "290663821a4033b24726";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -789,7 +789,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return hotCreateRequire(2)(__webpack_require__.s = 2);
+/******/ 	return hotCreateRequire(3)(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10359,7 +10359,7 @@ var ajax = function ajax(_options) {
   }
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (ajax);
+/* harmony default export */ __webpack_exports__["default"] = (ajax); // module.exports = ajax;
 
 /***/ }),
 
@@ -10374,7 +10374,7 @@ var ajax = function ajax(_options) {
 
 /***/ }),
 
-/***/ 2:
+/***/ 3:
 /*!**************************************************************************************************************!*\
   !*** multi webpack-dev-server/client?http://localhost:9090 webpack/hot/dev-server ./src/pages/js/options.js ***!
   \**************************************************************************************************************/

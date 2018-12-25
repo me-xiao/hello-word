@@ -63,3 +63,5 @@ const ajax = function (_options) {
  }
  
  export default ajax;
+
+// module.exports = ajax;

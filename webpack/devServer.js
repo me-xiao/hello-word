@@ -105,6 +105,13 @@ new webpackDevServer(webpack(config), {
                     ]);
                     res.write( '{"code":200,"msg":"ok!"}' );
                     return res.end();
+                }else if( url.parse(req.originalUrl).pathname == '/api/map_api' ){
+                    const params_str = fs.readFileSync( path.join(__dirname, "../src/data/params.json") );
+                    res.writeHead(200, [
+                        ['Content-Type', 'application/json' + '; charset=utf-8'],
+                    ]);
+                    res.write( `{"code":200, "msg":"ok", "data": ${params_str}}` );
+                    return res.end();
                 }else{
                     // res.writeHead(200, [
                     //     ['Content-Type', 'application/json' + '; charset=utf-8'],

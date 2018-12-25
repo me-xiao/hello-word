@@ -259,7 +259,7 @@
 /******/ 				};
 /******/ 			});
 /******/ 			hotUpdate = {};
-/******/ 			var chunkId = "set";
+/******/ 			var chunkId = "map";
 /******/ 			// eslint-disable-next-line no-lone-blocks
 /******/ 			{
 /******/ 				/*globals chunkId */
@@ -789,7 +789,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return hotCreateRequire(5)(__webpack_require__.s = 5);
+/******/ 	return hotCreateRequire(2)(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10221,17 +10221,33 @@ webpackContext.id = "./node_modules/webpack/hot sync ^\\.\\/log$";
 
 /***/ }),
 
-/***/ "./src/pages/js/set.js":
+/***/ "./src/pages/js/map.js":
 /*!*****************************!*\
-  !*** ./src/pages/js/set.js ***!
+  !*** ./src/pages/js/map.js ***!
   \*****************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! ../sass/set.css */ "./src/pages/sass/set.css"); //xhr
+var modules = {
+  monopoly: {
+    module: __webpack_require__(/*! ./utils/ajax.js */ "./src/pages/js/utils/ajax.js"),
+    schema: __webpack_require__(/*! ./utils/ajax.js */ "./src/pages/js/utils/ajax.js")
+  }
+};
+window.__modules__map = modules;
+
+/***/ }),
+
+/***/ "./src/pages/js/utils/ajax.js":
+/*!************************************!*\
+  !*** ./src/pages/js/utils/ajax.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 //创建ajax函数
-
-
 var ajax = function ajax(_options) {
   var options = _options || {};
   options.type = (options.type || 'GET').toUpperCase();
@@ -10294,83 +10310,23 @@ var ajax = function ajax(_options) {
   }
 };
 
-var bindFn = {
-  btn: function btn(skin) {
-    ajax({
-      url: '/api/set_skin',
-      data: {
-        skin: skin,
-        b: 458
-      },
-      dataType: 'json',
-      success: function success(res) {
-        if (res.code == 200) {
-          alert('成功选择：风格' + skin);
-          window.location.href = '/pages/options.html';
-        }
-      },
-      error: function error(msg) {}
-    });
-  }
-};
-var switchSkin;
-document.body.addEventListener('click', function (e) {
-  var evt = e || window.event;
-  var target = evt.target || evt.srcElement;
-
-  while (target && target != document) {
-    var className = target.className;
-    var id = target.id;
-
-    if (className === 'item') {
-      switchSkin = target.dataset.skin;
-      document.querySelectorAll('.on').forEach(function (item) {
-        var classNameArr = item.className.split(' ');
-        console.log(classNameArr);
-        var index = classNameArr.indexOf('on');
-        classNameArr.splice(index, 1);
-        item.className = classNameArr.join(' ');
-      });
-      target.className = target.className ? target.className + ' on' : 'on'; // bindFn.item( type );
-    } else if (id === 'next') {
-      if (!switchSkin) {
-        alert('请选择风格');
-        return;
-      }
-
-      bindFn.btn(switchSkin);
-    }
-
-    target = target.parentNode;
-  }
-});
+/* harmony default export */ __webpack_exports__["default"] = (ajax); // module.exports = ajax;
 
 /***/ }),
 
-/***/ "./src/pages/sass/set.css":
-/*!********************************!*\
-  !*** ./src/pages/sass/set.css ***!
-  \********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
-/***/ 5:
+/***/ 2:
 /*!**********************************************************************************************************!*\
-  !*** multi webpack-dev-server/client?http://localhost:9090 webpack/hot/dev-server ./src/pages/js/set.js ***!
+  !*** multi webpack-dev-server/client?http://localhost:9090 webpack/hot/dev-server ./src/pages/js/map.js ***!
   \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! webpack-dev-server/client?http://localhost:9090 */"./node_modules/_webpack-dev-server@3.1.10@webpack-dev-server/client/index.js?http://localhost:9090");
 __webpack_require__(/*! webpack/hot/dev-server */"./node_modules/_webpack@4.27.1@webpack/hot/dev-server.js");
-module.exports = __webpack_require__(/*! ./src/pages/js/set.js */"./src/pages/js/set.js");
+module.exports = __webpack_require__(/*! ./src/pages/js/map.js */"./src/pages/js/map.js");
 
 
 /***/ })
 
 /******/ });
-//# sourceMappingURL=set.js.map
+//# sourceMappingURL=map.js.map

@@ -14,8 +14,6 @@ const config = require("./base.config"),
 
     config.devtool =  'cheap-source-map';//cheap-module-eval-source-map/cheap-source-map
 
-
-
     const pluginsList = config.plugins;
 
     let htmlPluginsList = (path) => {

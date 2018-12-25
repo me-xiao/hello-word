@@ -97,19 +97,24 @@ textarea {
   -moz-box-sizing: border-box;
        box-sizing: border-box; }
 
-input[type="text"], input[type="button"], input[type="submit"], input[type="tel"] {
+input[type="text"],
+input[type="button"],
+input[type="submit"],
+input[type="tel"] {
   -webkit-appearance: none;
   outline: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -moz-border-radius: 0;
        border-radius: 0; }
 
-input, textarea {
+input,
+textarea {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-user-modify: read-write-plaintext-only;
   padding: 0; }
 
-input, textarea {
+input,
+textarea {
   border: 1px solid #E0E3E8;
   -moz-box-shadow: none;
        box-shadow: none;
@@ -119,7 +124,11 @@ input, textarea {
 input[type=radio] {
   margin-right: 5px; }
 
-button, input[type=button], .btn, .btn_dis, .btn_grey {
+button,
+input[type=button],
+.btn,
+.btn_dis,
+.btn_grey {
   -moz-border-radius: 4px;
        border-radius: 4px;
   background-color: #3580d9;
@@ -135,19 +144,37 @@ button, input[type=button], .btn, .btn_dis, .btn_grey {
   display: inline-block;
   text-align: center;
   cursor: pointer; }
-  button:focus, input[type=button]:focus, .btn:focus, .btn_dis:focus, .btn_grey:focus {
+  button:focus,
+  input[type=button]:focus,
+  .btn:focus,
+  .btn_dis:focus,
+  .btn_grey:focus {
     outline: none; }
-  button.on, input[type=button].on, .btn.on, .btn_dis.on, .btn_grey.on {
+  button.on,
+  input[type=button].on,
+  .btn.on,
+  .btn_dis.on,
+  .btn_grey.on {
     color: #fff;
     background-color: #4580D3; }
-  button:hover, input[type=button]:hover, .btn:hover, .btn_dis:hover, .btn_grey:hover {
+  button:hover,
+  input[type=button]:hover,
+  .btn:hover,
+  .btn_dis:hover,
+  .btn_grey:hover {
     color: #fff;
     background-color: #2b73c8; }
-  button:active, input[type=button]:active, .btn:active, .btn_dis:active, .btn_grey:active {
+  button:active,
+  input[type=button]:active,
+  .btn:active,
+  .btn_dis:active,
+  .btn_grey:active {
     color: #fff;
     background-color: #2163b1; }
 
-.btn i, .btn_dis i, .btn_grey i {
+.btn i,
+.btn_dis i,
+.btn_grey i {
   font-size: 16px;
   color: #FFF;
   margin-right: 6px; }
@@ -164,7 +191,8 @@ button, input[type=button], .btn, .btn_dis, .btn_grey {
 
 li {
   padding: 10px 0; }
-  li span, li em {
+  li span,
+  li em {
     color: #6F737A;
     font-size: 14px;
     line-height: 14px;
@@ -175,13 +203,20 @@ li {
     display: inline-block;
     padding: 0 10px 0 0;
     vertical-align: top; }
-    li span i, li em i {
+    li span i,
+    li em i {
       color: #c00; }
   li .wide {
     width: 100px; }
   li em {
     width: auto; }
-  li input[type=text], li input[type=date], li input[type=week], li input[type=month], li input[type=number], li input[type=password], li textarea {
+  li input[type=text],
+  li input[type=date],
+  li input[type=week],
+  li input[type=month],
+  li input[type=number],
+  li input[type=password],
+  li textarea {
     color: #212224;
     font-size: 14px;
     line-height: 18px;
@@ -189,14 +224,20 @@ li {
     -moz-border-radius: 4px;
          border-radius: 4px;
     width: 600px; }
-  li input[type=text].short, li input[type=text].shortest, li input[type=date], li .short {
+  li input[type=text].short,
+  li input[type=text].shortest,
+  li input[type=date],
+  li .short {
     width: 200px;
     margin-right: 50px; }
-  li input[type=text].shortest, li .shortest {
+  li input[type=text].shortest,
+  li .shortest {
     width: 60px; }
-  li input[type=text].long, li .long {
+  li input[type=text].long,
+  li .long {
     width: 640px; }
-  li input[type=date].normal, li .normal {
+  li input[type=date].normal,
+  li .normal {
     width: 600px;
     margin-right: 50px; }
   li textarea {
@@ -282,7 +323,7 @@ body {
 .main {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 20px 0; }
+  padding: 20px 0 90px; }
   .main .desc {
     padding: 20px; }
     .main .desc h3 {
@@ -319,9 +360,9 @@ body {
     background: #fff;
     -moz-border-radius: 2px;
          border-radius: 2px;
-    -webkit-transition: all .5s;
-    -moz-transition: all .5s;
-    transition: all .5s;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    transition: all .3s;
     padding: 20px;
     margin: 10px;
     position: relative; }
@@ -337,20 +378,22 @@ body {
       color: #666;
       color: #1d3b73;
       font-size: 20px; }
-    .main .item:hover {
-      cursor: pointer;
-      background: #eee;
-      /* :rgba(0,0,0,0~1) */ }
-    .main .item.on {
-      background: #eee; }
-      .main .item.on:after {
-        content: "\2713";
-        /* √√★√ */
-        color: #060;
-        font-size: 36px;
-        position: absolute;
-        right: 20px;
-        bottom: 0px; }
+
+.main .item:hover {
+  cursor: pointer;
+  background: #eee;
+  /* :rgba(0,0,0,0~1) */ }
+
+.main .item.on {
+  background: #eee; }
+  .main .item.on:after {
+    content: "\2713";
+    /* √√★√ */
+    color: #060;
+    font-size: 36px;
+    position: absolute;
+    right: 20px;
+    bottom: 0px; }
 
 
 /*# sourceMappingURL=set.css.map*/

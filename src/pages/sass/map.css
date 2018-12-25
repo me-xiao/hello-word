@@ -10,12 +10,8 @@
 		p{
 			margin: 0;
 			color: #999;
-			text-align: center;
+			text-align: left;
 		}
-	}
-	.code_box{
-		width: 100%;
-		margin: 0;
 	}
 }
 
