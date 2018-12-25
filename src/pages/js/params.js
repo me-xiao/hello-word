@@ -1,44 +1,23 @@
 require('../sass/params.css');
-import 'highlight.js/styles/atom-one-light.css';
-import hljs from 'highlight.js/lib/highlight';
-import _json from 'highlight.js/lib/languages/json';
-import _javascript from 'highlight.js/lib/languages/javascript';
-import _c from 'highlight.js/lib/languages/1c';
-hljs.registerLanguage('javascript', _javascript);
-hljs.registerLanguage('json', _json);
-hljs.registerLanguage('1c', _c);
-//参考：
-//https://highlightjs.org/
-//https://www.bootcdn.cn/highlight.js/
-//https://www.cnblogs.com/moqiutao/p/6541089.html
-
+import hljs from './comp/highlight';
+import formatParams from './utils/formatParams';
 
 //xhr
 import ajax from './utils/ajax.js';
 // const ajax = require( './utils/ajax.js' );
 
 const params_code = {
-    '1': params => {
+    '1': params=>{
         let str = JSON.stringify( params );
-        const handleParams = str =>{
-            return str.replace(/(?<=([\{]))\S{1}/ig, '\n  $&')
-            .replace(/(?<=([,]))[\s]*(?=(["]))/ig, '\n  ')
-            .replace(/[\s\S](?=([\}]))/ig, '$&\n')
-        }
-        str = handleParams( str );
+        str = formatParams( str );
         str = `//require式-开发源码
 const VBE = require("VBE");
 VBE(${str})`;
         return str;
     },
-    '2': params =>{
+    '2': params=>{
         let str = JSON.stringify( params );
-        const handleParams = str =>{
-            return str.replace(/(?<=([\{]))\S{1}/ig, '\n  $&')
-            .replace(/(?<=([,]))[\s]*(?=(["]))/ig, '\n  ')
-            .replace(/[\s\S](?=([\}]))/ig, '$&\n')
-        };
-        str = handleParams( str );
+        str = formatParams( str );
         str = `//SDK抽离式-页面源码
 <!DOCTYPE html><html><head>
 <meta charset="UTF-8">
@@ -104,12 +83,6 @@ const bindFn = {
                         <input type="text" value="" placeholder="请输入模块map.js" class="item_params" />
                     </li>`;
                 document.querySelector('#items').innerHTML = items;
-
-
-
-                
-
-
 
                 document.querySelector('#Usage').textContent = params_code[ data.use ]( data );
                 hljs.highlightBlock( document.querySelector('pre') );

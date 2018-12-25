@@ -1,20 +1,6 @@
 require('../sass/index.css');
-
-
-import 'highlight.js/styles/atom-one-light.css';
-import hljs from 'highlight.js/lib/highlight';
-import _json from 'highlight.js/lib/languages/json';
-import _javascript from 'highlight.js/lib/languages/javascript';
-import _c from 'highlight.js/lib/languages/1c';
-hljs.registerLanguage('javascript', _javascript);
-hljs.registerLanguage('json', _json);
-hljs.registerLanguage('1c', _c);
-
-const handleParams = str =>{
-     return str.replace(/(?<=([\{]))\S{1}/ig, '\n  $&')
-     .replace(/(?<=([,]))[\s]*(?=(["]))/ig, '\n  ')
-     .replace(/[\s\S](?=([\}]))/ig, '$&\n')
- }
+import hljs from './comp/highlight';
+import formatParams from './utils/formatParams';
 
  const params = {
      "skin":"3",
@@ -24,25 +10,12 @@ const handleParams = str =>{
       "traget_dom":"document.body"
     };
  let str = JSON.stringify( params );
- str = handleParams( str );
+ str = formatParams( str );
 
 document.querySelector('pre').textContent = `//require式-开发源码
 const VBE = require("VBE");
-VBE(${str})  
-
-
-
-
-
-
-
-
-
+VBE(${str})\n\n\n\n\n\n\n\n\n
 `;
-
-
-
-
 
 document.querySelectorAll('pre')[1].textContent = `//SDK抽离式-页面源码
 <!DOCTYPE html><html><head>

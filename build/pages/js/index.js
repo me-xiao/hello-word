@@ -64,7 +64,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "510941e01cff48d005c0";
+/******/ 	var hotCurrentHash = "917a2aa0d74326aa5195";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -11811,11 +11811,11 @@ webpackContext.id = "./node_modules/webpack/hot sync ^\\.\\/log$";
 
 /***/ }),
 
-/***/ "./src/pages/js/index.js":
-/*!*******************************!*\
-  !*** ./src/pages/js/index.js ***!
-  \*******************************/
-/*! no exports provided */
+/***/ "./src/pages/js/comp/highlight.js":
+/*!****************************************!*\
+  !*** ./src/pages/js/comp/highlight.js ***!
+  \****************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11830,8 +11830,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var highlight_js_lib_languages_javascript__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(highlight_js_lib_languages_javascript__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var highlight_js_lib_languages_1c__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! highlight.js/lib/languages/1c */ "./node_modules/_highlight.js@9.13.1@highlight.js/lib/languages/1c.js");
 /* harmony import */ var highlight_js_lib_languages_1c__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(highlight_js_lib_languages_1c__WEBPACK_IMPORTED_MODULE_4__);
-__webpack_require__(/*! ../sass/index.css */ "./src/pages/sass/index.css");
-
+//代码块高亮
 
 
 
@@ -11839,11 +11838,29 @@ __webpack_require__(/*! ../sass/index.css */ "./src/pages/sass/index.css");
 
 highlight_js_lib_highlight__WEBPACK_IMPORTED_MODULE_1___default.a.registerLanguage('javascript', highlight_js_lib_languages_javascript__WEBPACK_IMPORTED_MODULE_3___default.a);
 highlight_js_lib_highlight__WEBPACK_IMPORTED_MODULE_1___default.a.registerLanguage('json', highlight_js_lib_languages_json__WEBPACK_IMPORTED_MODULE_2___default.a);
-highlight_js_lib_highlight__WEBPACK_IMPORTED_MODULE_1___default.a.registerLanguage('1c', highlight_js_lib_languages_1c__WEBPACK_IMPORTED_MODULE_4___default.a);
+highlight_js_lib_highlight__WEBPACK_IMPORTED_MODULE_1___default.a.registerLanguage('1c', highlight_js_lib_languages_1c__WEBPACK_IMPORTED_MODULE_4___default.a); //参考：
+//https://highlightjs.org/
+//https://www.bootcdn.cn/highlight.js/
+//https://www.cnblogs.com/moqiutao/p/6541089.html
 
-var handleParams = function handleParams(str) {
-  return str.replace(/(?<=([\{]))\S{1}/ig, '\n  $&').replace(/(?<=([,]))[\s]*(?=(["]))/ig, '\n  ').replace(/[\s\S](?=([\}]))/ig, '$&\n');
-};
+/* harmony default export */ __webpack_exports__["default"] = (highlight_js_lib_highlight__WEBPACK_IMPORTED_MODULE_1___default.a);
+
+/***/ }),
+
+/***/ "./src/pages/js/index.js":
+/*!*******************************!*\
+  !*** ./src/pages/js/index.js ***!
+  \*******************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _comp_highlight__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./comp/highlight */ "./src/pages/js/comp/highlight.js");
+/* harmony import */ var _utils_formatParams__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils/formatParams */ "./src/pages/js/utils/formatParams.js");
+__webpack_require__(/*! ../sass/index.css */ "./src/pages/sass/index.css");
+
+
 
 var params = {
   "skin": "3",
@@ -11853,11 +11870,11 @@ var params = {
   "traget_dom": "document.body"
 };
 var str = JSON.stringify(params);
-str = handleParams(str);
-document.querySelector('pre').textContent = "//require\u5F0F-\u5F00\u53D1\u6E90\u7801\nconst VBE = require(\"VBE\");\nVBE(".concat(str, ")  \n\n\n\n\n\n\n\n\n\n");
+str = Object(_utils_formatParams__WEBPACK_IMPORTED_MODULE_1__["default"])(str);
+document.querySelector('pre').textContent = "//require\u5F0F-\u5F00\u53D1\u6E90\u7801\nconst VBE = require(\"VBE\");\nVBE(".concat(str, ")\n\n\n\n\n\n\n\n\n\n");
 document.querySelectorAll('pre')[1].textContent = "//SDK\u62BD\u79BB\u5F0F-\u9875\u9762\u6E90\u7801\n<!DOCTYPE html><html><head>\n<meta charset=\"UTF-8\">\n    <title>page</title>\n</head>\n<body>\n    <script type=\"text/javascript\" src=\"//g.alcdn.con/VBE/0.0.1/js/.js\"></script>\n    <script>\n        new VBE(".concat(str, ")\n    </script>\n</body>\n</html>  \n");
-highlight_js_lib_highlight__WEBPACK_IMPORTED_MODULE_1___default.a.highlightBlock(document.querySelector('pre'));
-highlight_js_lib_highlight__WEBPACK_IMPORTED_MODULE_1___default.a.highlightBlock(document.querySelectorAll('pre')[1]);
+_comp_highlight__WEBPACK_IMPORTED_MODULE_0__["default"].highlightBlock(document.querySelector('pre'));
+_comp_highlight__WEBPACK_IMPORTED_MODULE_0__["default"].highlightBlock(document.querySelectorAll('pre')[1]);
 document.body.addEventListener('click', function (e) {
   var evt = e || window.event;
   var target = evt.target || evt.srcElement;
@@ -11874,6 +11891,25 @@ document.body.addEventListener('click', function (e) {
     target = target.parentNode;
   }
 });
+
+/***/ }),
+
+/***/ "./src/pages/js/utils/formatParams.js":
+/*!********************************************!*\
+  !*** ./src/pages/js/utils/formatParams.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//格式化参数
+var formatParams = function formatParams(str) {
+  var result = str.replace(/(?<=([\{]))\S{1}/ig, '\n  $&').replace(/(?<=([,]))[\s]*(?=(["]))/ig, '\n  ').replace(/[\s\S](?=([\}]))/ig, '$&\n');
+  return result;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (formatParams); // module.exports = ajax;
 
 /***/ }),
 

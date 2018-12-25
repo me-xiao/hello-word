@@ -64,7 +64,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "510941e01cff48d005c0";
+/******/ 	var hotCurrentHash = "917a2aa0d74326aa5195";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -11811,11 +11811,11 @@ webpackContext.id = "./node_modules/webpack/hot sync ^\\.\\/log$";
 
 /***/ }),
 
-/***/ "./src/pages/js/map.js":
-/*!*****************************!*\
-  !*** ./src/pages/js/map.js ***!
-  \*****************************/
-/*! no exports provided */
+/***/ "./src/pages/js/comp/highlight.js":
+/*!****************************************!*\
+  !*** ./src/pages/js/comp/highlight.js ***!
+  \****************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11830,8 +11830,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var highlight_js_lib_languages_javascript__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(highlight_js_lib_languages_javascript__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var highlight_js_lib_languages_1c__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! highlight.js/lib/languages/1c */ "./node_modules/_highlight.js@9.13.1@highlight.js/lib/languages/1c.js");
 /* harmony import */ var highlight_js_lib_languages_1c__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(highlight_js_lib_languages_1c__WEBPACK_IMPORTED_MODULE_4__);
-__webpack_require__(/*! ../sass/map.css */ "./src/pages/sass/map.css");
-
+//代码块高亮
 
 
 
@@ -11839,9 +11838,30 @@ __webpack_require__(/*! ../sass/map.css */ "./src/pages/sass/map.css");
 
 highlight_js_lib_highlight__WEBPACK_IMPORTED_MODULE_1___default.a.registerLanguage('javascript', highlight_js_lib_languages_javascript__WEBPACK_IMPORTED_MODULE_3___default.a);
 highlight_js_lib_highlight__WEBPACK_IMPORTED_MODULE_1___default.a.registerLanguage('json', highlight_js_lib_languages_json__WEBPACK_IMPORTED_MODULE_2___default.a);
-highlight_js_lib_highlight__WEBPACK_IMPORTED_MODULE_1___default.a.registerLanguage('1c', highlight_js_lib_languages_1c__WEBPACK_IMPORTED_MODULE_4___default.a);
+highlight_js_lib_highlight__WEBPACK_IMPORTED_MODULE_1___default.a.registerLanguage('1c', highlight_js_lib_languages_1c__WEBPACK_IMPORTED_MODULE_4___default.a); //参考：
+//https://highlightjs.org/
+//https://www.bootcdn.cn/highlight.js/
+//https://www.cnblogs.com/moqiutao/p/6541089.html
+
+/* harmony default export */ __webpack_exports__["default"] = (highlight_js_lib_highlight__WEBPACK_IMPORTED_MODULE_1___default.a);
+
+/***/ }),
+
+/***/ "./src/pages/js/map.js":
+/*!*****************************!*\
+  !*** ./src/pages/js/map.js ***!
+  \*****************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _comp_highlight__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./comp/highlight */ "./src/pages/js/comp/highlight.js");
+__webpack_require__(/*! ../sass/map.css */ "./src/pages/sass/map.css");
+
+
 document.querySelector('pre').textContent = "\n//\u5BF9\u8C61\u58F0\u660E\nconst modules = {\n    //\u65B9\u6CD51\uFF1A\n    monopoly : {\n        module: require( '@ali_silver-lottery-monopoly' ),//\u6A21\u5757\u5305\uFF1A\u5B8C\u6210-\u4E1A\u52A1\u903B\u8F91\n        schema: require( '@ali_silver-lottery-monopoly/schema' )//\u6A21\u5757\u5305-schema\uFF1A\u5B8C\u6210\u5305\u914D\u7F6E\u63CF\u8FF0\n    },\n    //\u65B9\u6CD52\uFF1A\n    swtich : {\n        module: require( './act/swtich.js' ),//\u4E1A\u52A1\u6587\u4EF6\uFF1A\u5B8C\u6210-\u4E1A\u52A1\u903B\u8F91\n        schema: require( './act/swtich_schema.js' )//schema\u6587\u4EF6\uFF1A\u5B8C\u6210\u5305\u914D\u7F6E\u63CF\u8FF0\n    },\n    //\u65B9\u6CD53\uFF1A\n    record : {\n        module: Function,//ES6 class\u51FD\u6570\u4F53( class Record(params){} )\uFF1A\u5B8C\u6210-\u4E1A\u52A1\u903B\u8F91\n        schema: {}//json\u5BF9\u8C61-schema\uFF1A\u5B8C\u6210\u5305\u914D\u7F6E\u63CF\u8FF0\n    },\n}\nwindow.__modules__map = modules;\n//\u6CE8\uFF1A\u8BE5\u793A\u4F8B\u4E3A\u5F00\u53D1\u6E90\u7801\uFF0C\u672A\u7ECF\u6253\u5305\uFF0C\u96C6\u6210\u7528\u6237\u53EF\u4F7F\u7528\u672C\u5F15\u64CE\u6253\u5305(\u547D\u4EE4\uFF1Anpm run map)\uFF0C\u4E5F\u53EF\u4F7F\u7528\u81EA\u8EAB\u4E1A\u52A1\u811A\u624B\u67B6\u8FDB\u884C\u6253\u5305\n//\u5207\u52FF\u76F4\u63A5\u4F7F\u7528\uFF01\uFF01\uFF01\n//\u8C03\u7528\u6E32\u67D3(\u4F8B)\uFF1Anew modules.monopoly.module()\n\n";
-highlight_js_lib_highlight__WEBPACK_IMPORTED_MODULE_1___default.a.highlightBlock(document.querySelector('pre'));
+_comp_highlight__WEBPACK_IMPORTED_MODULE_0__["default"].highlightBlock(document.querySelector('pre'));
 
 /***/ }),
 

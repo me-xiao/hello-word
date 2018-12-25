@@ -64,7 +64,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "510941e01cff48d005c0";
+/******/ 	var hotCurrentHash = "917a2aa0d74326aa5195";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -11811,11 +11811,11 @@ webpackContext.id = "./node_modules/webpack/hot sync ^\\.\\/log$";
 
 /***/ }),
 
-/***/ "./src/pages/js/params.js":
-/*!********************************!*\
-  !*** ./src/pages/js/params.js ***!
-  \********************************/
-/*! no exports provided */
+/***/ "./src/pages/js/comp/highlight.js":
+/*!****************************************!*\
+  !*** ./src/pages/js/comp/highlight.js ***!
+  \****************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11830,9 +11830,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var highlight_js_lib_languages_javascript__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(highlight_js_lib_languages_javascript__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var highlight_js_lib_languages_1c__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! highlight.js/lib/languages/1c */ "./node_modules/_highlight.js@9.13.1@highlight.js/lib/languages/1c.js");
 /* harmony import */ var highlight_js_lib_languages_1c__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(highlight_js_lib_languages_1c__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _utils_ajax_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./utils/ajax.js */ "./src/pages/js/utils/ajax.js");
-__webpack_require__(/*! ../sass/params.css */ "./src/pages/sass/params.css");
-
+//代码块高亮
 
 
 
@@ -11844,30 +11842,40 @@ highlight_js_lib_highlight__WEBPACK_IMPORTED_MODULE_1___default.a.registerLangua
 //https://highlightjs.org/
 //https://www.bootcdn.cn/highlight.js/
 //https://www.cnblogs.com/moqiutao/p/6541089.html
-//xhr
+
+/* harmony default export */ __webpack_exports__["default"] = (highlight_js_lib_highlight__WEBPACK_IMPORTED_MODULE_1___default.a);
+
+/***/ }),
+
+/***/ "./src/pages/js/params.js":
+/*!********************************!*\
+  !*** ./src/pages/js/params.js ***!
+  \********************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _comp_highlight__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./comp/highlight */ "./src/pages/js/comp/highlight.js");
+/* harmony import */ var _utils_formatParams__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils/formatParams */ "./src/pages/js/utils/formatParams.js");
+/* harmony import */ var _utils_ajax_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils/ajax.js */ "./src/pages/js/utils/ajax.js");
+__webpack_require__(/*! ../sass/params.css */ "./src/pages/sass/params.css");
+
+
+ //xhr
 
  // const ajax = require( './utils/ajax.js' );
 
 var params_code = {
   '1': function _(params) {
     var str = JSON.stringify(params);
-
-    var handleParams = function handleParams(str) {
-      return str.replace(/(?<=([\{]))\S{1}/ig, '\n  $&').replace(/(?<=([,]))[\s]*(?=(["]))/ig, '\n  ').replace(/[\s\S](?=([\}]))/ig, '$&\n');
-    };
-
-    str = handleParams(str);
+    str = Object(_utils_formatParams__WEBPACK_IMPORTED_MODULE_1__["default"])(str);
     str = "//require\u5F0F-\u5F00\u53D1\u6E90\u7801\nconst VBE = require(\"VBE\");\nVBE(".concat(str, ")");
     return str;
   },
   '2': function _(params) {
     var str = JSON.stringify(params);
-
-    var handleParams = function handleParams(str) {
-      return str.replace(/(?<=([\{]))\S{1}/ig, '\n  $&').replace(/(?<=([,]))[\s]*(?=(["]))/ig, '\n  ').replace(/[\s\S](?=([\}]))/ig, '$&\n');
-    };
-
-    str = handleParams(str);
+    str = Object(_utils_formatParams__WEBPACK_IMPORTED_MODULE_1__["default"])(str);
     str = "//SDK\u62BD\u79BB\u5F0F-\u9875\u9762\u6E90\u7801\n<!DOCTYPE html><html><head>\n<meta charset=\"UTF-8\">\n    <title>page</title>\n</head>\n<body>\n    <script type=\"text/javascript\" src=\"//g.alcdn.con/VBE/0.0.1/js/.js\"></script>\n    <script>\n        new VBE(".concat(str, ")\n    </script>\n</body>\n</html>");
     return str;
   }
@@ -11883,7 +11891,7 @@ var bindFn = {
         params[key] = value;
       }
     });
-    Object(_utils_ajax_js__WEBPACK_IMPORTED_MODULE_5__["default"])({
+    Object(_utils_ajax_js__WEBPACK_IMPORTED_MODULE_2__["default"])({
       url: '/api/set_params',
       data: params,
       dataType: 'json',
@@ -11898,7 +11906,7 @@ var bindFn = {
     });
   },
   get_params: function get_params() {
-    Object(_utils_ajax_js__WEBPACK_IMPORTED_MODULE_5__["default"])({
+    Object(_utils_ajax_js__WEBPACK_IMPORTED_MODULE_2__["default"])({
       url: '/api/get_params',
       dataType: 'json',
       success: function success(res) {
@@ -11913,7 +11921,7 @@ var bindFn = {
         var items = "<li><span>\u9876\u90E8\u680FHTML</span>\n                        <textarea placeholder=\"\u8BF7\u8F93\u5165\u9876\u90E8\u680FHTML\" name=\"top_html\" class=\"item_params\">".concat(data.top_html || '', "</textarea>\n                    </li>\n                    <li><span>\u5E95\u90E8\u680FHTML</span>\n                        <textarea placeholder=\"\u8BF7\u8F93\u5165\u5E95\u90E8\u680FHTML\" name=\"bottom_html\" class=\"item_params\">").concat(data.bottom_html || '', "</textarea>\n                    </li>\n                    <li>\n                        <span>\u5E95\u90E8\u680F\u9AD8\u5EA6</span>\n                        <input type=\"text\" value=\"\" placeholder=\"\u8BF7\u8F93\u5165\u5E95\u90E8\u680F\u9AD8\u5EA6\" class=\"item_params\" />\n                    </li>\n                    <li>\n                        <span>\u6A21\u5757map.js</span>\n                        <input type=\"text\" value=\"\" placeholder=\"\u8BF7\u8F93\u5165\u6A21\u5757map.js\" class=\"item_params\" />\n                    </li>");
         document.querySelector('#items').innerHTML = items;
         document.querySelector('#Usage').textContent = params_code[data.use](data);
-        highlight_js_lib_highlight__WEBPACK_IMPORTED_MODULE_1___default.a.highlightBlock(document.querySelector('pre')); // hljs.highlightBlock( document.querySelectorAll('pre')[1] );
+        _comp_highlight__WEBPACK_IMPORTED_MODULE_0__["default"].highlightBlock(document.querySelector('pre')); // hljs.highlightBlock( document.querySelectorAll('pre')[1] );
       },
       error: function error(msg) {}
     });
@@ -12015,6 +12023,25 @@ var ajax = function ajax(_options) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (ajax); // module.exports = ajax;
+
+/***/ }),
+
+/***/ "./src/pages/js/utils/formatParams.js":
+/*!********************************************!*\
+  !*** ./src/pages/js/utils/formatParams.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//格式化参数
+var formatParams = function formatParams(str) {
+  var result = str.replace(/(?<=([\{]))\S{1}/ig, '\n  $&').replace(/(?<=([,]))[\s]*(?=(["]))/ig, '\n  ').replace(/[\s\S](?=([\}]))/ig, '$&\n');
+  return result;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (formatParams); // module.exports = ajax;
 
 /***/ }),
 

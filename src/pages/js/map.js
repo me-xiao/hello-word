@@ -1,13 +1,6 @@
 require('../sass/map.css');
+import hljs from './comp/highlight';
 
-import 'highlight.js/styles/atom-one-light.css';
-import hljs from 'highlight.js/lib/highlight';
-import _json from 'highlight.js/lib/languages/json';
-import _javascript from 'highlight.js/lib/languages/javascript';
-import _c from 'highlight.js/lib/languages/1c';
-hljs.registerLanguage('javascript', _javascript);
-hljs.registerLanguage('json', _json);
-hljs.registerLanguage('1c', _c);
 document.querySelector('pre').textContent = `
 //对象声明
 const modules = {

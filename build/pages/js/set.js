@@ -64,7 +64,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "510941e01cff48d005c0";
+/******/ 	var hotCurrentHash = "917a2aa0d74326aa5195";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -10225,13 +10225,78 @@ webpackContext.id = "./node_modules/webpack/hot sync ^\\.\\/log$";
 /*!*****************************!*\
   !*** ./src/pages/js/set.js ***!
   \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _utils_ajax_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils/ajax.js */ "./src/pages/js/utils/ajax.js");
 __webpack_require__(/*! ../sass/set.css */ "./src/pages/sass/set.css"); //xhr
+
+
+
+var bindFn = {
+  btn: function btn(skin) {
+    Object(_utils_ajax_js__WEBPACK_IMPORTED_MODULE_0__["default"])({
+      url: '/api/set_skin',
+      data: {
+        skin: skin,
+        b: 458
+      },
+      dataType: 'json',
+      success: function success(res) {
+        if (res.code == 200) {
+          alert('成功选择：风格' + skin);
+          window.location.href = '/pages/options.html';
+        }
+      },
+      error: function error(msg) {}
+    });
+  }
+};
+var switchSkin;
+document.body.addEventListener('click', function (e) {
+  var evt = e || window.event;
+  var target = evt.target || evt.srcElement;
+
+  while (target && target != document) {
+    var className = target.className;
+    var id = target.id;
+
+    if (className === 'item') {
+      switchSkin = target.dataset.skin;
+      document.querySelectorAll('.on').forEach(function (item) {
+        var classNameArr = item.className.split(' ');
+        var index = classNameArr.indexOf('on');
+        classNameArr.splice(index, 1);
+        item.className = classNameArr.join(' ');
+      });
+      target.className = target.className ? target.className + ' on' : 'on';
+    } else if (id === 'next') {
+      if (!switchSkin) {
+        alert('请选择风格');
+        return;
+      }
+
+      bindFn.btn(switchSkin);
+    }
+
+    target = target.parentNode;
+  }
+});
+
+/***/ }),
+
+/***/ "./src/pages/js/utils/ajax.js":
+/*!************************************!*\
+  !*** ./src/pages/js/utils/ajax.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 //创建ajax函数
-
-
 var ajax = function ajax(_options) {
   var options = _options || {};
   options.type = (options.type || 'GET').toUpperCase();
@@ -10294,56 +10359,7 @@ var ajax = function ajax(_options) {
   }
 };
 
-var bindFn = {
-  btn: function btn(skin) {
-    ajax({
-      url: '/api/set_skin',
-      data: {
-        skin: skin,
-        b: 458
-      },
-      dataType: 'json',
-      success: function success(res) {
-        if (res.code == 200) {
-          alert('成功选择：风格' + skin);
-          window.location.href = '/pages/options.html';
-        }
-      },
-      error: function error(msg) {}
-    });
-  }
-};
-var switchSkin;
-document.body.addEventListener('click', function (e) {
-  var evt = e || window.event;
-  var target = evt.target || evt.srcElement;
-
-  while (target && target != document) {
-    var className = target.className;
-    var id = target.id;
-
-    if (className === 'item') {
-      switchSkin = target.dataset.skin;
-      document.querySelectorAll('.on').forEach(function (item) {
-        var classNameArr = item.className.split(' ');
-        console.log(classNameArr);
-        var index = classNameArr.indexOf('on');
-        classNameArr.splice(index, 1);
-        item.className = classNameArr.join(' ');
-      });
-      target.className = target.className ? target.className + ' on' : 'on'; // bindFn.item( type );
-    } else if (id === 'next') {
-      if (!switchSkin) {
-        alert('请选择风格');
-        return;
-      }
-
-      bindFn.btn(switchSkin);
-    }
-
-    target = target.parentNode;
-  }
-});
+/* harmony default export */ __webpack_exports__["default"] = (ajax); // module.exports = ajax;
 
 /***/ }),
 
