@@ -64,7 +64,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "917a2aa0d74326aa5195";
+/******/ 	var hotCurrentHash = "10d3413e6b4a6fbe1901";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -12037,7 +12037,7 @@ var ajax = function ajax(_options) {
 __webpack_require__.r(__webpack_exports__);
 //格式化参数
 var formatParams = function formatParams(str) {
-  var result = str.replace(/(?<=([\{]))\S{1}/ig, '\n  $&').replace(/(?<=([,]))[\s]*(?=(["]))/ig, '\n  ').replace(/[\s\S](?=([\}]))/ig, '$&\n');
+  var result = str.replace(/(?<=([\{]))\S{1}/ig, '\n  $&').replace(/(?<=([,]))[\s]*(?=(["]))/ig, '\n  ').replace(/[\s\S](?=([\}]))/ig, '$&\n').replace(/^\s+|\s+$/ig, '');
   return result;
 };
 
