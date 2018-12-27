@@ -10,9 +10,9 @@ const modules = {
         schema: require( '@ali_silver-lottery-monopoly/schema' )//模块包-schema：完成包配置描述
     },
     //方法2：
-    swtich : {
-        module: require( './act/swtich.js' ),//业务文件：完成-业务逻辑
-        schema: require( './act/swtich_schema.js' )//schema文件：完成包配置描述
+    switch : {
+        module: require( './act/switch.js' ),//业务文件：完成-业务逻辑
+        schema: require( './act/switch_schema.js' )//schema文件：完成包配置描述
     },
     //方法3：
     record : {
