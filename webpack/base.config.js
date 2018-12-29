@@ -28,7 +28,6 @@ pluginsList.push(
         chunkFilename: "[id].css"
     })
 )
-
 // let htmlPluginsList = (path) => {
 //     let files = fs.readdirSync(path);
 //     files.forEach((item, index) => {

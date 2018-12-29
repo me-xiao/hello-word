@@ -31,8 +31,6 @@ const config = require("./base.config"),
 
     console.log( dom_data[ skin_data.skin ] );
 
-
-
     const pluginsList = config.plugins;
 
     let htmlPluginsList = (path) => {
