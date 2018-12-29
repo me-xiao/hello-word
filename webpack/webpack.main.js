@@ -14,11 +14,19 @@ const pluginsList = [];
 config.entry = {
     index: './src/main/index.js'
 };
+// for (const key in config.entry) {
+//     let value = config.entry[key];
+//     if (!Array.isArray(value)) {
+//         value = [value]
+//     }
+//     value.unshift('webpack-dev-server/client?http://localhost:9090', 'webpack/hot/dev-server');
+//     config.entry[key] = value;
+// }
 config.output = {
     path: build_path, //打包后的文件存放的地方
     filename: "main/[name].js", //打包后输出文件的文件名
     publicPath: "/",
-    library: 'VBE',
+    library: 'Point',
     libraryTarget: 'umd',
     libraryExport: 'default'
 };

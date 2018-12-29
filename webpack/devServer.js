@@ -4,21 +4,47 @@
  * @since: 2018/12/10
 */
 
-const webpack = require('webpack'),
-    webpackDevServer = require('webpack-dev-server'),
-    config = require('./webpack.dev'),
-    port = 9090;
-
-
+const webpack = require('webpack');
+const webpackDevServer = require('webpack-dev-server');
+const port = 9090;
 // const $exec=require('child_process').exec;
 const open = require("open");
 
 const fs = require('fs');
 const url = require('url');
 const path = require('path');
-
 const build_path = path.join(__dirname, "../build"); //distribution目录路径
+const config_dev = require('./webpack.dev');
+const config_main = require('./webpack.main');
 
+const hotHandle = {
+    entry : _entry =>{
+        for (const key in _entry) {
+            let value = _entry[key];
+            if (!Array.isArray(value)) {
+                value = [value]
+            }
+            value.unshift('webpack-dev-server/client?http://localhost:9090',
+                'webpack/hot/dev-server');
+            _entry[key] = value;
+        }
+    },
+    plugins : _plugins =>{
+        _plugins.push(
+            new webpack.HotModuleReplacementPlugin(),
+            new webpack.NoEmitOnErrorsPlugin(),
+            new webpack.LoaderOptionsPlugin({
+                debug: true
+            })
+        );
+    }
+}
+hotHandle.entry( config_dev.entry );
+hotHandle.entry( config_main.entry );
+hotHandle.plugins( config_dev.plugins );
+hotHandle.plugins( config_main.plugins );
+
+const config = [ config_dev, config_main ];
 
 const ParseQuery = query => {
     const reg = /([^=&\s\?]+)[=\s]*([^&\s]*)/g;
@@ -28,18 +54,13 @@ const ParseQuery = query => {
     }
     return obj;
 }
-
-config.watch = true; // 开启监听文件更改
-
 const handleParams = str =>{
     return str.replace(/(?<=([\{]))\S{1}/ig, '\n $&')
     .replace(/(?<=([,]))[\s]*(?=(["]))/ig, '\n  ')
     .replace(/[\s\S](?=([\}]))/ig, '$&\n')
 }
-
-
+// console.log( config );
 new webpackDevServer(webpack(config), {
-
     // publicPath: config.output.publicPath,
     // hot: true,
     // inline: true,

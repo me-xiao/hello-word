@@ -33,8 +33,6 @@ document.querySelectorAll('pre')[1].textContent = `//SDK抽离式-页面源码
 hljs.highlightBlock( document.querySelector('pre') );
 hljs.highlightBlock( document.querySelectorAll('pre')[1] );
 
-
-
 document.body.addEventListener('click',function(e){
      const evt = e || window.event;
      let target = evt.target || evt.srcElement;

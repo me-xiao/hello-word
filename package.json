@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "node_modules/.bin/webpack --config webpack/webpack.dev.js",
+    "main": "node_modules/.bin/webpack --config webpack/webpack.main.js -p",
     "build": "node_modules/.bin/webpack --config webpack/webpack.prod.js",
     "server": "node webpack/devServer.js",
     "dev": "tnpm run server",
