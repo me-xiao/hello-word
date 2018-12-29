@@ -1,7 +1,7 @@
 /*
  * Webpack main Config
  * @author: weijialu(wjl152856@alibaba-inc.com)
- * @since: 2018/12/10
+ * @since: 2018/12/29
  */
 const path = require('path');
 const webpack = require('webpack');
@@ -19,7 +19,7 @@ config.entry = {
 //     if (!Array.isArray(value)) {
 //         value = [value]
 //     }
-//     value.unshift('webpack-dev-server/client?http://localhost:9090', 'webpack/hot/dev-server');
+//     value.unshift('webpack-dev-server/client?http://localhost:9090','webpack/hot/dev-server');
 //     config.entry[key] = value;
 // }
 config.output = {
@@ -30,7 +30,7 @@ config.output = {
     libraryTarget: 'umd',
     libraryExport: 'default'
 };
-// config.devtool = 'cheap-module-source-map'; //cheap-module-eval-source-map/cheap-source-map
+// config.devtool = 'cheap-module-source-map'; //cheap-module-eval-source-map / cheap-source-map
 config.mode = 'production';
 pluginsList.push(
     new UglifyJsPlugin({

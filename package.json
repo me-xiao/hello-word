@@ -4,7 +4,7 @@
   "description": "Visual Build Engine",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/.bin/webpack --config webpack/webpack.dev.js",
+    "test": "node_modules/.bin/webpack --config webpack/webpack.test.js",
     "main": "node_modules/.bin/webpack --config webpack/webpack.main.js -p",
     "build": "node_modules/.bin/webpack --config webpack/webpack.prod.js",
     "server": "node webpack/devServer.js",
