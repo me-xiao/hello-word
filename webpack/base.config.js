@@ -1,6 +1,6 @@
 /*
  * Webpack base Config
- * @author: weijialu(wjl152856@alibaba-inc.com)
+ * @author: weijialu
  * @since: 2018/12/10
 */
 const path = require('path');

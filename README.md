@@ -8,4 +8,4 @@ tnpm start
 
 功能描述：
 
-启动“tnpm start”后，编辑src目录下文件，server自动监听打包
+启动“tnpm start”后，编辑src目录下文件，server自动监听打包# hello-word
