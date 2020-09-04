@@ -38,7 +38,7 @@
     "html-withimg-loader": "^0.1.16",
     "htmllint-loader": "^2.1.4",
     "mini-css-extract-plugin": "^0.4.5",
-    "node-sass": "^4.10.0",
+    "node-sass": "^4.13.1",
     "open": "^0.0.5",
     "postcss-loader": "^3.0.0",
     "sass-loader": "^7.1.0",
@@ -51,7 +51,7 @@
   },
   "dependencies": {
     "highlight.js": "^9.13.1",
-    "node-sass": "^4.10.0",
+    "node-sass": "^4.13.1",
     "webpack": "^4.27.1"
   }
 }
